@@ -3,8 +3,8 @@
 
 class Figure {
     public:
-        virtual double calcArea() {}
-        virtual double calcPer() {}
+        virtual double calcArea() = 0;
+        virtual double calcPer() = 0;
 };
 
 #endif
