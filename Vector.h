@@ -21,8 +21,6 @@ template <class T> class Vector {
         T& operator [] (int);
         int size();
 
-    class IllegalNumber{};
-
 private:
         void moreMemory();
 
@@ -30,7 +28,6 @@ private:
 
 template <class T>
 Vector<T>::Vector(int capacity) {
-    if(capacity < 1) throw IllegalNumber();
     this->capacity = capacity;
     top = 0;
     arr = (T*) malloc(sizeof(T) * capacity);
