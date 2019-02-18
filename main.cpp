@@ -1,5 +1,4 @@
 #include <iostream>
-#include <stdio.h>
 #include "Figure.h"
 #include "Circle.h"
 #include "Square.h"
@@ -9,7 +8,7 @@ using namespace std;
 
 int main() {
     /*
-    Circle cr1 = Circle(1.1212);
+    Circle cr1(1.21221);
     cout << "Circle:\n" << cr1.getRadius() << endl;
     cr1.setRadius(14.322);
     cout << cr1.getRadius() << endl << cr1.calcArea() << endl << cr1.calcPer() << endl;
@@ -19,13 +18,28 @@ int main() {
     sq1.setSide(9.2);
     cout << sq1.getSide() << endl << sq1.calcArea() << endl << sq1.calcPer() << endl;
     */
-    Vector<int> v1;
-    v1.pushEl(12);
-    v1.pushEl(32);
-    v1.pushEl(99);
-    v1[1] = 4;
+
+
+    Vector<Circle> v1(12, Circle(322));
+    Vector<int> v2;
+
+
     for(int i = 0; i < v1.size(); i++)
-        cout << v1[i] << ' ';
+        cout << v1[i].getRadius() << ' ';
+
+    try {
+        Circle cr(-5);
+
+    }
+    catch (Vector<Circle>::IllegalNumber ) {
+        cout << "kek";
+    }
+    
+    Circle c1(12);
+
+
+    cout << endl <<  c1.getRadius();
+
 
 
     return 0;
