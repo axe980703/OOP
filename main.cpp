@@ -19,7 +19,6 @@ int main() {
     cout << sq1.getSide() << endl << sq1.calcArea() << endl << sq1.calcPer() << endl;
     */
 
-
     Vector<Circle> v1(12, Circle(322));
     Vector<int> v2;
 
@@ -28,18 +27,15 @@ int main() {
         cout << v1[i].getRadius() << ' ';
 
     try {
-        Circle cr(-5);
+        Circle cr(-23);
 
     }
-    catch (Vector<Circle>::IllegalNumber ) {
-        cout << "kek";
+    catch (Circle::IllegalNumber err) {
+        cout << "\nkek CHEBUREK wrong value:" << err.value;
     }
-    
+
     Circle c1(12);
-
-
     cout << endl <<  c1.getRadius();
-
 
 
     return 0;
