@@ -9,5 +9,11 @@ class Circle : public Figure {
 
         void setRadius(double);
         double getRadius();
+
+        class IllegalNumber{
+            public:
+            double value;
+            IllegalNumber(double v) : value(v) {}
+        };
 };
 
