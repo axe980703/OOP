@@ -14,21 +14,35 @@ template <class T> class Vector {
     public:
         Vector();
         Vector(int);
+        Vector(int, const T &obj);
         ~Vector();
         void pushEl(T);
         void operator = (const Vector&);
         T& operator [] (int);
         int size();
-    private:
+
+    class IllegalNumber{};
+
+private:
         void moreMemory();
 
 };
 
 template <class T>
 Vector<T>::Vector(int capacity) {
+    if(capacity < 1) throw IllegalNumber();
     this->capacity = capacity;
     top = 0;
     arr = (T*) malloc(sizeof(T) * capacity);
+}
+
+template <class T>
+Vector<T>::Vector(int size, const T &obj) {
+    capacity = size;
+    top = size;
+    arr = (T*) malloc(sizeof(T) * size);
+    for(int i = 0; i < size; i++)
+        arr[i] = obj;
 }
 
 template <class T>
@@ -54,8 +68,11 @@ template <class T>
 T& Vector<T>::operator [] (int i) {
     return arr[i];
 }
-
-
+/*
+template <class T>
+T& Vector<T>::operator new (int i) {
+    return arr[i];
+}*/
 
 template <class T>
 void Vector<T>::operator = (const Vector &v2) {
