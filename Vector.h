@@ -3,7 +3,15 @@
 
 #include <cstdlib>
 
-const int VEC_DEF_SIZE = 64;
+#define VEC_DEF_SIZE 64
+
+
+class WrongArrayIndex {
+public:
+    int value;
+    WrongArrayIndex(int i) : value(i) {}
+};
+
 
 
 template <class T> class Vector {
@@ -19,15 +27,20 @@ template <class T> class Vector {
         void pushEl(T);
         void operator = (const Vector&);
         T& operator [] (int);
+
+        void operator delete(void* p);
         int size();
 
-private:
-        void moreMemory();
+
+        private:
+            void moreMemory();
 
 };
 
+
 template <class T>
 Vector<T>::Vector(int capacity) {
+    //memMan
     this->capacity = capacity;
     top = 0;
     arr = (T*) malloc(sizeof(T) * capacity);
@@ -63,13 +76,9 @@ void Vector<T>::pushEl(T el) {
 
 template <class T>
 T& Vector<T>::operator [] (int i) {
+    if(i < 0) throw WrongArrayIndex(i);
     return arr[i];
 }
-/*
-template <class T>
-T& Vector<T>::operator new (int i) {
-    return arr[i];
-}*/
 
 template <class T>
 void Vector<T>::operator = (const Vector &v2) {
