@@ -2,6 +2,8 @@
 
 const double PI = 3.14;
 
+MemoryManager memMan(INIT_MEM);
+
 
 Circle::Circle(double radius) {
     if(radius <= 0) throw IllegalNumber(radius);
@@ -23,7 +25,8 @@ void Circle::setRadius(double d) {
 double Circle::getRadius() {
     return radius;
 }
-
+/*
 void* Circle::operator new (size_t size) {
+    return (int*) malloc(size * sizeof(int));
 
-}
+}*/
