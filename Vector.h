@@ -19,38 +19,38 @@ template <class T> class Vector {
     int capacity;
     int top;
 
-    public:
-        Vector();
-        Vector(int);
-        Vector(int, const T &obj);
-        ~Vector();
-        void pushEl(T);
-        void operator = (const Vector&);
-        T& operator [] (int);
+public:
+    Vector();
+    Vector(int);
+    Vector(int, const T &obj);
+    ~Vector();
+    void pushEl(T);
+    void operator = (const Vector&);
+    T& operator [] (int);
 
-        void operator delete(void* p);
-        int size();
+    void operator delete(void* p);
+    int size();
 
 
-        private:
-            void moreMemory();
+private:
+    void moreMemory();
+    void reallocMemory();
 
 };
 
 
 template <class T>
 Vector<T>::Vector(int capacity) {
-    //memMan
     this->capacity = capacity;
     top = 0;
-    arr = (T*) malloc(sizeof(T) * capacity);
+    arr = new T[capacity];
 }
 
 template <class T>
 Vector<T>::Vector(int size, const T &obj) {
     capacity = size;
     top = size;
-    arr = (T*) malloc(sizeof(T) * size);
+        arr = (T*) malloc(sizeof(T) * size);
     for(int i = 0; i < size; i++)
         arr[i] = obj;
 }
@@ -82,7 +82,7 @@ T& Vector<T>::operator [] (int i) {
 
 template <class T>
 void Vector<T>::operator = (const Vector &v2) {
-
+    ///////// need to realize
 }
 
 template <class T>
@@ -93,11 +93,15 @@ int Vector<T>::size() {
 template <class T>
 void Vector<T>::moreMemory() {
     capacity *= 2;
-    T *tmpMem = (T*) malloc(sizeof(T) * capacity);
-    for(int i = 0; i < capacity / 2; i++)
-        tmpMem[i] = arr[i];
-    free(arr);
-    arr = tmpMem;
+    reallocMemory();
+}
+
+template <class T>
+void Vector<T>::reallocMemory() {
+    T *tmp = new T[capacity];
+    memcpy(tmp, arr, top * sizeof(T));
+    delete [] arr;
+    arr = tmp;
 }
 
 
