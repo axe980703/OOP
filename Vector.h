@@ -25,7 +25,7 @@ public:
     Vector(int, const T &obj);
     ~Vector();
     void pushEl(T);
-    void operator = (const Vector&);
+    void operator = (Vector&);
     T& operator [] (int);
 
     void operator delete(void* p);
@@ -81,8 +81,11 @@ T& Vector<T>::operator [] (int i) {
 }
 
 template <class T>
-void Vector<T>::operator = (const Vector &v2) {
-    ///////// need to realize
+void Vector<T>::operator = (Vector &v2) {
+    /////////  create tmp arr and reswitch memory
+    arr = v2.arr;
+    capacity = v2.capacity;
+    top = v2.top;
 }
 
 template <class T>
