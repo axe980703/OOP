@@ -2,6 +2,7 @@
 #define OOP_VECTOR_H
 
 #include <cstdlib>
+#include <cstring>
 
 #define VEC_DEF_SIZE 64
 
@@ -28,7 +29,7 @@ public:
     void operator = (Vector&);
     T& operator [] (int);
 
-    void operator delete(void* p);
+    //void operator delete(void* p);
     int size();
 
 
