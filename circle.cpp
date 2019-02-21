@@ -2,7 +2,7 @@
 
 const double PI = 3.14;
 
-MemoryManager memMan(INIT_MEM);
+//MemoryManager memMan(INIT_MEM);
 
 
 Circle::Circle(double radius) {
