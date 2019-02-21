@@ -5,28 +5,31 @@
 
 class Circle : public Figure {
     double radius;
-    public:
-        Circle(double);
-        double calcArea();
-        double calcPer();
+public:
+    Circle(double);
+    double calcArea();
+    double calcPer();
 
-        void setRadius(double);
-        double getRadius();
-        void* operator new(size_t size);
-
-
-    class MemoryManager {
-        size_t size;
-    public:
-        MemoryManager(size_t sz): size(sz) {
-            allocMem(INIT_MEM);
-        }
-        ~MemoryManager() {
-
-        }
-
-        void* allocMem(size_t sz);
-        void freeMem(void *ptr);
-    };
+    void setRadius(double);
+    double getRadius();
+    //void* operator new(size_t size);
 };
 
+class MemoryManager {
+    size_t size;
+    void* mem;
+public:
+    MemoryManager(size_t sz): size(sz) {
+        mem = allocMem(INIT_MEM);
+    }
+    ~MemoryManager() {
+        freeMem(mem);
+    }
+
+    void* allocMem(size_t size) {
+        return malloc(size);
+    }
+    void freeMem(void *ptr) {
+        free(ptr);
+    }
+};
