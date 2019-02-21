@@ -1,7 +1,6 @@
 #include <cstdlib>
 #include "Figure.h"
 
-#define INIT_MEM 1024
 
 class Circle : public Figure {
     double radius;
@@ -18,18 +17,19 @@ public:
 class MemoryManager {
     size_t size;
     void* mem;
-public:
-    MemoryManager(size_t sz): size(sz) {
-        mem = allocMem(INIT_MEM);
-    }
-    ~MemoryManager() {
-        freeMem(mem);
-    }
+    public:
+        MemoryManager(size_t size) {
+            mem = allocMem(size);
+            this->size = size;
+        }
+        ~MemoryManager() {
+            freeMem(mem);
+        }
 
-    void* allocMem(size_t size) {
-        return malloc(size);
-    }
-    void freeMem(void *ptr) {
-        free(ptr);
-    }
+        void* allocMem(size_t size) {
+            return malloc(size);
+        }
+        void freeMem(void *ptr) {
+            free(ptr);
+        }
 };
