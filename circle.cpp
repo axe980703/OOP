@@ -10,6 +10,8 @@ Circle::Circle(double radius) {
     this->radius = radius;
 }
 
+Circle::Circle() = default;
+
 double Circle::calcArea() {
     return PI * radius * radius;
 }
@@ -25,6 +27,14 @@ void Circle::setRadius(double d) {
 double Circle::getRadius() {
     return radius;
 }
+
+ostream& operator<<(ostream& os, Circle& cr)
+{
+    os << "Circle | radius: " << cr.getRadius() << " | area: " << cr.calcArea() << " | perimeter: " << cr.calcPer() << endl;
+    return os;
+}
+
+
 /*
 void* Circle::operator new (size_t size) {
     return (int*) malloc(size * sizeof(int));

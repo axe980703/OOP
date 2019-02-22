@@ -2,7 +2,6 @@
 #define OOP_VECTOR_H
 
 #include <cstdlib>
-#include <cstring>
 
 #define VEC_DEF_SIZE 64
 
@@ -12,7 +11,6 @@ public:
     int value;
     WrongArrayIndex(int i) : value(i) {}
 };
-
 
 
 template <class T> class Vector {
@@ -29,7 +27,7 @@ public:
     void operator = (Vector&);
     T& operator [] (int);
 
-    //void operator delete(void* p);
+    void operator delete(void* p);
     int size();
 
 
@@ -51,7 +49,7 @@ template <class T>
 Vector<T>::Vector(int size, const T &obj) {
     capacity = size;
     top = size;
-        arr = (T*) malloc(sizeof(T) * size);
+    arr = (T*) malloc(sizeof(T) * size);
     for(int i = 0; i < size; i++)
         arr[i] = obj;
 }
@@ -83,10 +81,11 @@ T& Vector<T>::operator [] (int i) {
 
 template <class T>
 void Vector<T>::operator = (Vector &v2) {
-    /////////  create tmp arr and reswitch memory
-    arr = v2.arr;
-    capacity = v2.capacity;
+    if(v2.capacity > capacity)
+        capacity = v2.capacity;
     top = v2.top;
+    reallocMemory();
+    memcpy(v2.arr, arr, top * sizeof(T));
 }
 
 template <class T>
@@ -107,6 +106,8 @@ void Vector<T>::reallocMemory() {
     delete [] arr;
     arr = tmp;
 }
+
+
 
 
 #endif
